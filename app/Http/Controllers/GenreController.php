@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCommentRequest;
-use App\Models\Comment;
-
+use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,25 +19,18 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateCommentRequest $request)
+    public function store(Request $request)
     {
-        $comment = Comment::create([
-            'content' => $request->content,
-            'movie_id' => $request->movie_id
-        ]);
-
-        $movie = Movie::find($request->movie_id);
-        return redirect('/movies/' . $movie->id)->with('status', 'Comment created successfully');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $name)
     {
-        //
+        $movies = Genre::where("name", $name)->first()->movies()->get();
     }
-
     /**
      * Update the specified resource in storage.
      */

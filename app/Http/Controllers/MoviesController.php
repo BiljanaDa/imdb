@@ -17,7 +17,8 @@ class MoviesController extends Controller
         return view("pages.movies", compact("movies"));
     }
 
-    public function showCreateMovie() {
+    public function showCreateMovie()
+    {
         return view('pages.createmovie');
     }
 

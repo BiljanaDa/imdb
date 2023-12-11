@@ -13,7 +13,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Genre</label>
-            <input type="text" class="form-control" name="genre" required>
+            <input type="number" class="form-control" name="genre" required>
         </div>
         <div class="mb-3">
             <label class="form-label">Year</label>
