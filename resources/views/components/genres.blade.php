@@ -1,4 +1,4 @@
-<div class="col">
+{{-- <div class="col">
     <div class="card shadow-sm">
         <div class="card-body">
             <h2><a href="/movies/{{ $movie->id }}">{{ $movie->title }}</a></h2>
@@ -7,4 +7,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

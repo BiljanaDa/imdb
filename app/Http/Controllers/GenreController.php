@@ -29,7 +29,18 @@ class GenreController extends Controller
      */
     public function show(string $name)
     {
-        $movies = Genre::where("name", $name)->first()->movies()->get();
+        $genre = Genre::where("name", $name)->first();
+    
+        if ($genre) {
+            $movies = $genre->movies()->get();
+            
+            return view('pages.genre', [
+                'genre' => $genre,
+                'movies' => $movies,
+            ]);
+        } else {
+            return view('genres.not-found');
+        }
     }
     /**
      * Update the specified resource in storage.

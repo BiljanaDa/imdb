@@ -20,4 +20,5 @@ class Movie extends Model
     {
         return $this->belongsTo(Genre::class);
     }
+    
 }
