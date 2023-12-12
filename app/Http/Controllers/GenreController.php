@@ -30,13 +30,15 @@ class GenreController extends Controller
     public function show(string $name)
     {
         $genre = Genre::where("name", $name)->first();
-    
+
         if ($genre) {
             $movies = $genre->movies()->get();
-            
+            $sidebarContent = Movie::orderBy('created_at', 'desc')->take(5)->get(); 
+    
             return view('pages.genre', [
                 'genre' => $genre,
                 'movies' => $movies,
+                'sidebar' => $sidebarContent, 
             ]);
         } else {
             return view('genres.not-found');

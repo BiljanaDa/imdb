@@ -16,9 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', function (MoviesController $moviesController) {
+    $sidebarContent = $moviesController->sidebar();
+    return view('pages.home', ['sidebar' => $sidebarContent]);
+});;
 
 Route::get('/movies', [MoviesController::class, 'index']);
 Route::get('/movies/{id}', [MoviesController::class, 'show']);
@@ -29,3 +30,5 @@ Route::post('/createmovie', [MoviesController::class, 'store']);
 Route::post('/createcomment', [CommentController::class, 'store']);
 
 Route::get('/genres/{name}', [GenreController::class, 'show']);
+
+
