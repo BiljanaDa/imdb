@@ -1,7 +1,9 @@
 @extends('layout.default')
 
 @section('content')
-    <div class="container">
+<br><br>
+    <div class="container">    
+        
          <h1>{{ $genre->name }} Movies</h1>
     @foreach($movies as $movie)
         <div>
@@ -12,5 +14,7 @@
         </div>
         <hr>
     @endforeach
-    </div>
+  @include('components.sidebar')
+    </div> 
+ 
 @endsection

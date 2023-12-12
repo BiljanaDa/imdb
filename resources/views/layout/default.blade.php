@@ -5,7 +5,6 @@
 <body>
     <div class = "container">
         @include('components.navigation')
-        {{-- @include('components.sidebar') --}}
         @yield('content')
 
         @include('components.footer')

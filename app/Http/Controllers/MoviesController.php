@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMovieRequest;
-use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -23,22 +22,24 @@ class MoviesController extends Controller
         return view('pages.createmovie');
     }
 
-
+    public function sidebar()
+    {
+        $latest5 = Movie::orderBy('created_at', 'desc')->take(5)->get();
+        return $latest5;
+    }
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateMovieRequest $request)
-    {
-        $movie = Movie::create($request->all()); // Kreiranje filma
-    
-        // Dohvatanje odabranih žanrova iz zahteva i povezivanje sa novim filmom
-        if ($request->has('genres')) {
-            $genres = $request->input('genres');
-            $movie->genres()->attach($genres);
-        }
-    
-        return redirect('/createmovie')->with('status', 'Movie created successfully!');
+   public function store(CreateMovieRequest $request)
+{
+    $movie = Movie::create($request->all()); 
+    if ($request->has('genres')) {
+        $genres = $request->input('genres');
+        $movie->genres()->attach($genres);
     }
+
+    return redirect('/createmovie')->with('status', 'Movie created successfully!');
+}
 
     /**
      * Display the specified resource.
@@ -49,11 +50,6 @@ class MoviesController extends Controller
         return view('pages.movie', compact('movie'));
     }
 
-    public function create()
-    {
-        $genres = Genre::pluck('name', 'id');
-        return view('film.create', compact('genres'));
-    }
     /**
      * Update the specified resource in storage.
      */
