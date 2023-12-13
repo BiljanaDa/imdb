@@ -13,7 +13,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Genre</label>
-            <input type="number" class="form-control" name="genre_id" required>
+            <select class="form-control" name="genres[]" multiple>
+                @foreach ($genres as $genre)
+                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="mb-3">
             <label class="form-label">Year</label>

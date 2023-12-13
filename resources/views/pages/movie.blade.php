@@ -4,9 +4,11 @@
     <div class="container">
         @if ($movie)
             <h1>{{ $movie->title }}</h1>
-            <p>Genre: <a href="/genres/{{ $movie->genre->name }}">{{ $movie->genre->name }}</a></p>
+            @foreach ($movie->genres as $genre)
+                <p><a href="/genres/{{ $genre->name }}">{{ $genre->name }}</a></p>
+            @endforeach
             <p><b>Director: </b>{{ $movie->director }}</p>
-            <p><b>Year of relace: </b>{{ $movie->year }}</p>
+            <p><b>Year: </b>{{ $movie->year }}</p>
             <p><b>Plot: </b> {{ $movie->storyline }}</p>
 
             @include('components.createcomment')

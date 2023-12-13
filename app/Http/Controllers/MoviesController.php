@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMovieRequest;
+use App\Models\Genre;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,8 @@ class MoviesController extends Controller
 
     public function showCreateMovie()
     {
-        return view('pages.createmovie');
+        $genres = Genre::all();
+        return view('pages.createmovie', compact('genres'));
     }
 
     public function sidebar()
@@ -30,16 +32,13 @@ class MoviesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   public function store(CreateMovieRequest $request)
-{
-    $movie = Movie::create($request->all()); 
-    if ($request->has('genres')) {
-        $genres = $request->input('genres');
-        $movie->genres()->attach($genres);
-    }
+    public function store(CreateMovieRequest $request)
+    {
+        $movie = Movie::create($request->all());
+        $movie->genres()->attach($request->genres);
 
-    return redirect('/createmovie')->with('status', 'Movie created successfully!');
-}
+        return redirect('/createmovie')->with('status', 'Movie created successfully!');
+    }
 
     /**
      * Display the specified resource.
